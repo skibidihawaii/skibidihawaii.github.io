@@ -1,11 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Skibidi Hawaii</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чем я занимаюсь</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e2e8f0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #38bdf8;
+      color: #0f172a;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #64748b;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Привет, мир</h1>
-    <p>Это мой сайт. Я его сделал сам.</p>
+  <div class="container">
+    <h1>Привет 👋</h1>
+    <div class="subtitle">Это страница о том, чем я занимаюсь</div>
+
+    <div class="card">
+      <h2>⚡ Работа</h2>
+      <p>Я работаю электромонтёром и разбираюсь в электрических системах.</p>
+      <span class="tag">Электрика</span>
+      <span class="tag">Практика</span>
+    </div>
+
+    <div class="card">
+      <h2>🎨 Творчество</h2>
+      <p>Люблю создавать что-то новое: дизайн, идеи, визуальные проекты.</p>
+      <span class="tag">Дизайн</span>
+      <span class="tag">Креатив</span>
+    </div>
+
+    <div class="card">
+      <h2>📚 Обучение</h2>
+      <p>Постоянно изучаю новые темы и пытаюсь глубоко понимать суть вещей.</p>
+      <span class="tag">Саморазвитие</span>
+      <span class="tag">Знания</span>
+    </div>
+
+    <div class="card">
+      <h2>🚀 Цели</h2>
+      <p>Ищу себя в разных направлениях и пробую разные навыки.</p>
+      <span class="tag">Развитие</span>
+      <span class="tag">Будущее</span>
+    </div>
+
+    <footer>
+      © 2026 Моя страница
+    </footer>
+  </div>
 </body>
 </html>
