@@ -1,214 +1,147 @@
-```html
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotline Miami Loader</title>
+```javascript
+const log = document.getElementById("log");
+const progress = document.getElementById("progress");
+const final = document.getElementById("final");
 
-<style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family: Consolas, monospace;
+const bars = [
+"1% {_____}",
+"2% {_____}",
+"3% {_____}",
+"4% {_____}",
+"5% {_____}",
+"6% {_____}",
+"7% {_____}",
+"8% {_____}",
+"9% {_____}",
+"10% {_____}",
+"11% {_____}",
+"12% {_____}",
+"13% {_____}",
+"14% {_____}",
+"15% {_____}",
+"16% {_____}",
+"17% {_____}",
+"18% {_____}",
+"19% {_____}",
+"20% {#____}",
+"21% {#____}",
+"22% {#____}",
+"23% {#____}",
+"24% {#____}",
+"25% {#____}",
+"26% {#____}",
+"27% {#____}",
+"28% {#____}",
+"29% {#____}",
+"30% {#____}",
+"31% {#____}",
+"32% {#____}",
+"33% {#____}",
+"34% {#____}",
+"35% {#____}",
+"36% {#____}",
+"37% {#____}",
+"38% {#____}",
+"39% {#____}",
+"40% {##___}",
+"41% {##___}",
+"42% {##___}",
+"43% {##___}",
+"44% {##___}",
+"45% {##___}",
+"46% {##___}",
+"47% {##___}",
+"48% {##___}",
+"49% {##___}",
+"50% {##___}",
+"51% {##___}",
+"52% {##___}",
+"53% {##___}",
+"54% {##___}",
+"55% {##___}",
+"56% {##___}",
+"57% {##___}",
+"58% {##___}",
+"59% {##___}",
+"60% {###__}",
+"61% {###__}",
+"62% {###__}",
+"63% {###__}",
+"64% {###__}",
+"65% {###__}",
+"66% {###__}",
+"67% {###__}",
+"68% {###__}",
+"69% {###__}",
+"70% {###__}",
+"71% {###__}",
+"72% {###__}",
+"73% {###__}",
+"74% {###__}",
+"75% {###__}",
+"76% {###__}",
+"77% {###__}",
+"78% {###__}",
+"79% {###__}",
+"80% {####_}",
+"81% {####_}",
+"82% {####_}",
+"83% {####_}",
+"84% {####_}",
+"85% {####_}",
+"86% {####_}",
+"87% {####_}",
+"88% {####_}",
+"89% {####_}",
+"90% {####_}",
+"91% {####_}",
+"92% {####_}",
+"93% {####_}",
+"94% {####_}",
+"95% {####_}",
+"96% {####_}",
+"97% {####_}",
+"98% {####_}",
+"99% {####_}",
+"100% {#####}"
+];
+
+addLine("СКАЧИВАНИЕ ПТИЧЕК-ПИЗДУШЕК");
+addLine("ЗАГРУЗКА ПТИЧЕК-ПИЗДУШЕК");
+addLine("--------------------------------");
+
+let i = 0;
+
+const interval = setInterval(() => {
+
+    addLine(bars[i]);
+
+    progress.style.width = (i + 1) + "%";
+
+    i++;
+
+    if(i >= bars.length){
+
+        clearInterval(interval);
+
+        setTimeout(() => {
+            document.querySelector(".console").style.display = "none";
+            final.classList.add("show");
+        }, 700);
     }
 
-    body{
-        overflow:hidden;
-        background:black;
-        color:white;
-    }
+}, 70);
 
-    /* Радужный фон */
-    .bg{
-        position:fixed;
-        width:100%;
-        height:100%;
-        background:
-            linear-gradient(
-                45deg,
-                #ff0080,
-                #ff8c00,
-                #40e0d0,
-                #8a2be2,
-                #ff0080
-            );
-        background-size:400% 400%;
-        animation: neonFlow 10s ease infinite;
-        filter: blur(20px) brightness(0.7);
-        transform: scale(1.2);
-        z-index:-2;
-    }
+function addLine(text){
 
-    .overlay{
-        position:fixed;
-        width:100%;
-        height:100%;
-        background:rgba(0,0,0,0.35);
-        z-index:-1;
-    }
+    const div = document.createElement("div");
 
-    @keyframes neonFlow{
-        0%{background-position:0% 50%;}
-        50%{background-position:100% 50%;}
-        100%{background-position:0% 50%;}
-    }
+    div.className = "line";
 
-    .console{
-        position:absolute;
-        top:50%;
-        left:50%;
-        transform:translate(-50%, -50%);
-        width:80%;
-        max-width:800px;
-        height:400px;
-        background:rgba(0,0,0,0.65);
-        border:2px solid #ff00aa;
-        box-shadow:0 0 30px #ff00aa;
-        padding:20px;
-        overflow:hidden;
-    }
+    div.textContent = text;
 
-    .title{
-        color:#00ffee;
-        margin-bottom:20px;
-        font-size:24px;
-        text-shadow:0 0 10px #00ffee;
-    }
+    log.appendChild(div);
 
-    .log{
-        height:280px;
-        overflow:hidden;
-        line-height:1.6;
-        font-size:18px;
-    }
-
-    .line{
-        animation: appear 0.15s linear;
-    }
-
-    @keyframes appear{
-        from{
-            opacity:0;
-            transform:translateX(-10px);
-        }
-        to{
-            opacity:1;
-            transform:translateX(0);
-        }
-    }
-
-    .progress-container{
-        margin-top:20px;
-        width:100%;
-        height:25px;
-        background:#111;
-        border:1px solid #ff00aa;
-    }
-
-    .progress{
-        width:0%;
-        height:100%;
-        background:linear-gradient(90deg,#ff0080,#00ffee);
-        box-shadow:0 0 20px #ff00aa;
-        transition:width 0.1s linear;
-    }
-
-    .final-screen{
-        position:fixed;
-        inset:0;
-        background:white;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:80px;
-        color:black;
-        opacity:0;
-        pointer-events:none;
-        transition:0.5s;
-    }
-
-    .final-screen.show{
-        opacity:1;
-    }
-</style>
-</head>
-<body>
-
-<div class="bg"></div>
-<div class="overlay"></div>
-
-<div class="console">
-    <div class="title">
-        > Загрузка Птичек-Пиздушек...
-    </div>
-
-    <div class="log" id="log"></div>
-
-    <div class="progress-container">
-        <div class="progress" id="progress"></div>
-    </div>
-</div>
-
-<div class="final-screen" id="final">
-    100%
-</div>
-
-<script>
-    const log = document.getElementById("log");
-    const progress = document.getElementById("progress");
-    const final = document.getElementById("final");
-
-    let percent = 0;
-
-    const messages = [
-        "Поиск птичек...",
-        "Распаковка крыльев...",
-        "Загрузка перьев...",
-        "Калибровка писка...",
-        "Сканирование голубей...",
-        "Проверка чаек...",
-        "Подключение уток...",
-        "Разгон воробьёв...",
-        "Запуск чайки.exe...",
-        "Компиляция криков..."
-    ];
-
-    function addLine(text){
-        const div = document.createElement("div");
-        div.className = "line";
-        div.textContent = text;
-        log.appendChild(div);
-
-        log.scrollTop = log.scrollHeight;
-    }
-
-    const interval = setInterval(() => {
-
-        percent++;
-
-        const randomMsg =
-            messages[Math.floor(Math.random() * messages.length)];
-
-        addLine(
-            "[" + percent + "%] " + randomMsg
-        );
-
-        progress.style.width = percent + "%";
-
-        if(percent >= 100){
-            clearInterval(interval);
-
-            setTimeout(() => {
-                document.querySelector(".console").style.display = "none";
-                final.classList.add("show");
-            }, 500);
-        }
-
-    }, 80);
-</script>
-
-</body>
-</html>
+    log.scrollTop = log.scrollHeight;
+}
 ```
