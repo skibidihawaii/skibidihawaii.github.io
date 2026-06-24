@@ -1,114 +1,285 @@
-```javascript
-const log = document.getElementById("log");
-const progress = document.getElementById("progress");
-const final = document.getElementById("final");
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const bars = [
-"1% {_____}",
-"2% {_____}",
-"3% {_____}",
-"4% {_____}",
-"5% {_____}",
-"6% {_____}",
-"7% {_____}",
-"8% {_____}",
-"9% {_____}",
-"10% {_____}",
-"11% {_____}",
-"12% {_____}",
-"13% {_____}",
-"14% {_____}",
-"15% {_____}",
-"16% {_____}",
-"17% {_____}",
-"18% {_____}",
-"19% {_____}",
-"20% {#____}",
-"21% {#____}",
-"22% {#____}",
-"23% {#____}",
-"24% {#____}",
-"25% {#____}",
-"26% {#____}",
-"27% {#____}",
-"28% {#____}",
-"29% {#____}",
-"30% {#____}",
-"31% {#____}",
-"32% {#____}",
-"33% {#____}",
-"34% {#____}",
-"35% {#____}",
-"36% {#____}",
-"37% {#____}",
-"38% {#____}",
-"39% {#____}",
-"40% {##___}",
-"41% {##___}",
-"42% {##___}",
-"43% {##___}",
-"44% {##___}",
-"45% {##___}",
-"46% {##___}",
-"47% {##___}",
-"48% {##___}",
-"49% {##___}",
-"50% {##___}",
-"51% {##___}",
-"52% {##___}",
-"53% {##___}",
-"54% {##___}",
-"55% {##___}",
-"56% {##___}",
-"57% {##___}",
-"58% {##___}",
-"59% {##___}",
-"60% {###__}",
-"61% {###__}",
-"62% {###__}",
-"63% {###__}",
-"64% {###__}",
-"65% {###__}",
-"66% {###__}",
-"67% {###__}",
-"68% {###__}",
-"69% {###__}",
-"70% {###__}",
-"71% {###__}",
-"72% {###__}",
-"73% {###__}",
-"74% {###__}",
-"75% {###__}",
-"76% {###__}",
-"77% {###__}",
-"78% {###__}",
-"79% {###__}",
-"80% {####_}",
-"81% {####_}",
-"82% {####_}",
-"83% {####_}",
-"84% {####_}",
-"85% {####_}",
-"86% {####_}",
-"87% {####_}",
-"88% {####_}",
-"89% {####_}",
-"90% {####_}",
-"91% {####_}",
-"92% {####_}",
-"93% {####_}",
-"94% {####_}",
-"95% {####_}",
-"96% {####_}",
-"97% {####_}",
-"98% {####_}",
-"99% {####_}",
-"100% {#####}"
-];
+<title>Птички-Пиздушки</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Consolas, monospace;
+}
+
+body{
+    overflow:hidden;
+    background:black;
+    color:white;
+}
+
+/* РАДУЖНЫЙ ФОН */
+
+.bg{
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(
+        45deg,
+        #ff0080,
+        #ff6600,
+        #00ffee,
+        #8a2be2,
+        #ff0080
+    );
+
+    background-size:400% 400%;
+
+    animation:neonFlow 8s ease infinite;
+
+    filter:blur(25px) brightness(0.7);
+
+    transform:scale(1.2);
+
+    z-index:-2;
+}
+
+@keyframes neonFlow{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* CRT ЛИНИИ */
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+
+    pointer-events:none;
+
+    mix-blend-mode:overlay;
+}
+
+/* КОНСОЛЬ */
+
+.console{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:85%;
+    max-width:900px;
+
+    height:500px;
+
+    background:rgba(0,0,0,0.65);
+
+    border:2px solid #ff00aa;
+
+    box-shadow:
+    0 0 20px #ff00aa,
+    0 0 60px #ff00aa;
+
+    padding:20px;
+
+    overflow:hidden;
+
+    animation:glitch 0.15s infinite;
+}
+
+@keyframes glitch{
+
+    0%{
+        transform:translate(-50%,-50%) translateX(0px);
+    }
+
+    25%{
+        transform:translate(-50%,-50%) translateX(1px);
+    }
+
+    50%{
+        transform:translate(-50%,-50%) translateX(-1px);
+    }
+
+    75%{
+        transform:translate(-50%,-50%) translateY(1px);
+    }
+
+    100%{
+        transform:translate(-50%,-50%) translateY(0px);
+    }
+}
+
+/* ТЕКСТ */
+
+.title{
+
+    color:#00ffee;
+
+    font-size:26px;
+
+    margin-bottom:20px;
+
+    text-shadow:
+    0 0 10px #00ffee,
+    0 0 25px #00ffee;
+}
+
+.log{
+
+    height:360px;
+
+    overflow:hidden;
+
+    line-height:1.6;
+
+    font-size:18px;
+}
+
+.line{
+
+    color:#00ff99;
+
+    text-shadow:
+    0 0 5px #00ff99,
+    0 0 10px #00ff99;
+
+    animation:appear 0.12s linear;
+}
+
+@keyframes appear{
+
+    from{
+        opacity:0;
+        transform:translateX(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0px);
+    }
+}
+
+/* ПОЛОСКА */
+
+.progress-container{
+
+    width:100%;
+
+    height:24px;
+
+    margin-top:20px;
+
+    border:1px solid #ff00aa;
+
+    background:#111;
+}
+
+.progress{
+
+    width:0%;
+
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        #ff0080,
+        #00ffee
+    );
+
+    box-shadow:
+    0 0 15px #ff00aa;
+
+    transition:width 0.05s linear;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="console">
+
+    <div class="title">
+        > SYSTEM_BOOT.exe
+    </div>
+
+    <div class="log" id="log"></div>
+
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
+</div>
+
+<script>
+
+const log = document.getElementById("log");
+
+const progress = document.getElementById("progress");
+
+/* ПРОЦЕНТЫ */
+
+const bars = [];
+
+for(let i = 1; i <= 100; i++){
+
+    let hashes = "";
+
+    if(i >= 20) hashes = "#____";
+    if(i >= 40) hashes = "##___";
+    if(i >= 60) hashes = "###__";
+    if(i >= 80) hashes = "####_";
+    if(i == 100) hashes = "#####";
+
+    if(i < 20) hashes = "_____";
+
+    bars.push(i + "% {" + hashes + "}");
+}
+
+/* НАЧАЛО */
 
 addLine("СКАЧИВАНИЕ ПТИЧЕК-ПИЗДУШЕК");
 addLine("ЗАГРУЗКА ПТИЧЕК-ПИЗДУШЕК");
 addLine("--------------------------------");
+
+/* ЗАГРУЗКА */
 
 let i = 0;
 
@@ -125,12 +296,39 @@ const interval = setInterval(() => {
         clearInterval(interval);
 
         setTimeout(() => {
-            document.querySelector(".console").style.display = "none";
-            final.classList.add("show");
+
+            document.body.innerHTML = `
+
+            <div style="
+                width:100vw;
+                height:100vh;
+
+                background:white;
+
+                display:flex;
+
+                justify-content:center;
+                align-items:center;
+
+                font-size:120px;
+
+                color:black;
+
+                font-family:Consolas;
+
+                animation:flash 0.2s infinite;
+            ">
+                100%
+            </div>
+
+            `;
+
         }, 700);
     }
 
 }, 70);
+
+/* ДОБАВЛЕНИЕ СТРОК */
 
 function addLine(text){
 
@@ -144,4 +342,9 @@ function addLine(text){
 
     log.scrollTop = log.scrollHeight;
 }
+
+</script>
+
+</body>
+</html>
 ```
